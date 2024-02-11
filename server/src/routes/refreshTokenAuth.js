@@ -10,7 +10,7 @@ router.use(cookieParser());
 
 router.route('/').post(async (req, res) => {
 	try {
-		const refreshToken = req.cookies.refreshToken;
+		const refreshToken = req.cookies[cookieConfig.cookieName];
 
 		if (!refreshToken) return res.status(401).end();
 
