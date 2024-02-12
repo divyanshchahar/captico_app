@@ -1,4 +1,17 @@
+import { useState, useContext } from 'react';
+import AuthContext from '../../provider/AuthProvider';
+
 function LoginFormLayout() {
+	const { login } = useContext(AuthContext);
+
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		login(email, password);
+	};
+
 	return (
 		<form>
 			<div className="m-3">
@@ -7,7 +20,10 @@ function LoginFormLayout() {
 					type="email"
 					className="form-control"
 					id="exampleInputEmail1"
-					aria-describedby="emailHelp"
+					value={email}
+					onChange={(e) => {
+						setEmail(e.target.value);
+					}}
 				/>
 			</div>
 
@@ -17,11 +33,20 @@ function LoginFormLayout() {
 					type="password"
 					className="form-control"
 					id="exampleInputPassword1"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</div>
 
 			<div className="m-3">
-				<button className="btn btn-primary">Login</button>
+				<button
+					className="btn btn-primary"
+					onClick={(e) => {
+						handleClick(e);
+					}}
+				>
+					Login
+				</button>
 			</div>
 		</form>
 	);
