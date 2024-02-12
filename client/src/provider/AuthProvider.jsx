@@ -37,8 +37,29 @@ export function AuthContextProvider({ children }) {
 		});
 	};
 
+	const logout = async () => {
+		try {
+			const response = await fetch(apiEndPoints.logout, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				method: 'DELETE',
+				credentials: 'include',
+			});
+
+			if (response.ok) {
+				setAuth(null);
+				setIsLoggedIn(false);
+				setLastUpdated(null);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	return (
-		<AuthContext.Provider value={{ login, auth, lastUpdated, isLoggedIn }}>
+		<AuthContext.Provider
+			value={{ login, logout, auth, lastUpdated, isLoggedIn }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
