@@ -28,10 +28,7 @@ router.route('/').post(async (req, res) => {
 
 		res
 			.cookie(cookieConfig.cookieName, refreshToken, cookieConfig.config)
-			.send({
-				user: { ...user._doc },
-				acessToken: acessToken,
-			})
+			.send({ user: { ...user._doc }, acessToken: acessToken })
 			.status(200)
 			.end();
 	} catch (error) {
