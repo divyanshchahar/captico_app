@@ -56,9 +56,38 @@ export function AuthContextProvider({ children }) {
 			console.error(error);
 		}
 	};
+
+	const refreshAuth = () => {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const response = await fetch(apiEndPoints.refreshAuth, {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					method: 'POST',
+					credentials: 'include',
+				});
+
+				if (response.ok) {
+					const json = await response.json();
+
+					setAuth(json.acessToken);
+					setLastUpdated(Date.now());
+					setIsLoggedIn(true);
+
+					resolve(json.acessToken);
+				} else {
+					reject(response.ok);
+				}
+			} catch (error) {
+				reject(error);
+			}
+		});
+	};
+
 	return (
 		<AuthContext.Provider
-			value={{ login, logout, auth, lastUpdated, isLoggedIn }}
+			value={{ login, logout, refreshAuth, auth, lastUpdated, isLoggedIn }}
 		>
 			{children}
 		</AuthContext.Provider>
