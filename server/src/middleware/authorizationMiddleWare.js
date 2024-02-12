@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
 function authorizationMiddleware(req, res, next) {
 	try {
@@ -6,7 +6,7 @@ function authorizationMiddleware(req, res, next) {
 		const token = authHeader && authHeader.split(' ')[1];
 
 		if (!token) {
-			return res.sendStatus(401);
+			return res.status(401).end();
 		}
 
 		jwt.verify(token, process.env.ACESS_TOKEN_SECRET, (error, decoded) => {
@@ -23,4 +23,4 @@ function authorizationMiddleware(req, res, next) {
 	}
 }
 
-export default authorizationMiddleware;
+module.exports = authorizationMiddleware;
