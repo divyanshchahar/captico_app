@@ -4,6 +4,7 @@ import apiEndPoints from '../../config/apiEndPoints';
 import CoursesList from '../layouts/CoursesList';
 import CourseFormLayout from '../layouts/CourseFormLayout';
 import EditCourseLayout from '../layouts/EditCourseLayout';
+import { Link } from 'react-router-dom';
 
 function CoursesPage() {
 	useEffect(() => {
@@ -99,6 +100,11 @@ function CoursesPage() {
 						editFunc={() => {}}
 						toggleEditing={setIsEdit}
 					/>
+					<div className="d-grid gap-2">
+						<Link className="btn btn-outline-primary" to="/">
+							Home
+						</Link>
+					</div>
 				</>
 			)}
 		</>
