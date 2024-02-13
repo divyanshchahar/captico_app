@@ -56,8 +56,10 @@ function LoginFormLayout() {
 				</div>
 			</form>
 
-			<p>Dont have an account</p>
-			<Link to="/register">Register</Link>
+			<div className="m-3">
+				<p>Dont have an account</p>
+				<Link to="/register">Register</Link>
+			</div>
 		</>
 	);
 }
