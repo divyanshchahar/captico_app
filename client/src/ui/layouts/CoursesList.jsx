@@ -1,4 +1,9 @@
-function CoursesList({ courses }) {
+import useMakeAuthRequest from '../../hooks/useMakeAuthRequest';
+
+// eslint-disable-next-line react/prop-types
+function CoursesList({ courses = [], delFunc = () => {} }) {
+	const makeAuthRequest = useMakeAuthRequest();
+
 	return (
 		<ul className="list-group list-group-flush">
 			{courses.map((item) => {
@@ -10,7 +15,13 @@ function CoursesList({ courses }) {
 							<button type="button" className="btn btn-primary">
 								<i className="bi bi-pen-fill"></i>
 							</button>
-							<button type="button" className="btn btn-primary">
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={() => {
+									makeAuthRequest(delFunc, item._id);
+								}}
+							>
 								<i className="bi bi-trash-fill"></i>
 							</button>
 						</div>
