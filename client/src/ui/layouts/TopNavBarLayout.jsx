@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../../provider/AuthProvider';
 
-function TopNavBar() {
+function TopNavBarLayout() {
 	const { isLoggedIn, logout } = useContext(AuthContext);
 
 	return (
@@ -31,4 +31,4 @@ function TopNavBar() {
 	);
 }
 
-export default TopNavBar;
+export default TopNavBarLayout;
