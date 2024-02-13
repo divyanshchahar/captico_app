@@ -43,11 +43,16 @@ router.route('/').put(authorizationMiddleware, async (req, res) => {
 
 		if (course.userId == req.headers.id) {
 			course.name = req.body.name;
-			course.startDate = req.body.startDate;
-			course.endDate = req.body.endDate;
-			course.description = req.body.description;
 
 			const updatedCourse = await course.save();
+
+			if (updatedCourse) {
+				const updatedCourses = await Courses.find({ userId: req.headers.id });
+
+				if (!updatedCourses) return res.status(404).end();
+
+				return res.status(400).send(updatedCourses).end();
+			}
 
 			return res.send(updatedCourse).status(200).end();
 		}
